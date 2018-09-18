@@ -1,4 +1,4 @@
-# Nodejs API Core with Nodejs with Express + Mongoose
+# Nodejs API Core with Express + Mongoose
 
 ## RUN LOCAL
 
