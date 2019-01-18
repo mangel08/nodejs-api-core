@@ -18,11 +18,11 @@ const { ObjectId } = Schema.Types
 const UserSchema = new Schema({
   email: { type: String, lowercase: true, trim: true, required: true, unique: true, index: { unique: true } },
   password: { type: String, required: true, select: false },
-  username: { type: String, required: true, unique: true , index: true },
+  username: { type: String, required: true, unique: true, index: true },
   createdAt: { type: Date, default: Date.now(), select: false },
   updatedAt: { type: Date, default: Date.now(), select: false },
   person: { type: ObjectId, ref: 'Person' },
-  rol: { type: ObjectId, ref: 'Rol' },
+  rol: { type: ObjectId, ref: 'Rol', default: process.env.DEFAULT_ROL },
   status: { type: Number }
 })
 
@@ -30,11 +30,10 @@ const UserSchema = new Schema({
 UserSchema.plugin(uniqueValidator)
 
 // Función que se ejecuta antes de guardar el usuario
-// Genera el cifrado del password
+// Genera el cifrado del password y setea el usuario con el status 1 de Activo
 UserSchema.pre('save', function (next) {
   let user = this
   user.status = ACTIVE
-  user.rol = process.env.DEFAULT_ROL //The Default Rol of user
   if (!user.isModified('password')) return next()
 
   // Metodo para generar el cifrado del password y reemplazarlo

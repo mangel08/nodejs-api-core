@@ -22,6 +22,6 @@ api.delete('/user/:_id', isAuth, guard.check([['user:delete'], ['user']]), UserC
 
 // Populate Persona
 api.get('/users/person/', isAuth, guard.check([['users-person:read'], ['user']]), UserCtrl.getAllUserPerson)
-api.get('/user/person/:_id', isAuth, guard.check([['user-person:read'], ['user']]), UserCtrl.getUserPerson)
+api.get('/user/:_id/person', isAuth, guard.check([['user-person:read'], ['user']]), UserCtrl.getUserPerson)
 
 export default api

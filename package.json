@@ -4,8 +4,12 @@
   "description": "NodeJs Core Api Restfull with Express + Mongoose + JWT",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js --exec babel-node",
-    "start-dev": "DEBUG=nodejs-api-core:* NODE_ENV=development nodemon server.js --exec babel-node",
+    "start": "npm run build && DEBUG=nodejs-api-core:* NODE_ENV=production node ./build/server.js",
+    "prod": "DEBUG=nodejs-api-core:* NODE_ENV=production node ./build/server.js",
+    "start-dev": "DEBUG=nodejs-api-core:* NODE_ENV=development nodemon ./src/server.js --exec babel-node",
+    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel -d ./build ./src -s",
+    "clean": "rm -rf build && mkdir build",
     "lint": "standard"
   },
   "repository": {
